@@ -40,19 +40,25 @@
 							flex-direction: column;
 						}
 					</style>
-					
+
 
 					<div class="col-lg-3 col-6">
 						<!-- small box -->
-						
+
 						<div class="small-box bg-info rounded-box">
 							<div class="inner">
 								<?php
-								require 'connectdb_dashboard.php';
+
+								// Load the database configuration
+								$this->load->database();
+
+								// Now you can use $this->db to interact with the database
+								$query = $this->db->query('SELECT * FROM perkara');
+
 								$currentYear = date('Y');
-								$query = "select * from perkara where year(tanggal_pendaftaran)= '$currentYear'";
-								$query_run = mysqli_query($connection, $query);
-								$row = mysqli_num_rows($query_run);
+								$query = $this->db->query("SELECT * FROM perkara WHERE YEAR(tanggal_pendaftaran) = '$currentYear'");
+
+								$row = $query->num_rows();
 								echo '<h3>' . $row . '</h3>Perkara';
 								?>
 								<p>Diterima</p>
@@ -66,14 +72,22 @@
 					<div class="small-box bg-success rounded-box">
 						<div class="inner">
 							<?php
-							//require 'connectdb_dashboard.php';
-							$currentYear = date('Y');
-							$query = "select * from perkara_putusan where year(tanggal_putusan)= '$currentYear'";
+							$this->load->database();
+							$query = $this->db->query('SELECT * FROM perkara_putusan');
 
-							$query_run = mysqli_query($connection, $query);
-							//return $query->result();
-							$row = mysqli_num_rows($query_run);
+
+
+							$currentYear = date('Y');
+							// $query = "select * from perkara_putusan where year(tanggal_putusan)= '$currentYear'";
+
+							// $query_run = mysqli_query($connection, $query);
+							// //return $query->result();
+							// $row = mysqli_num_rows($query_run);
+							// echo '<h3>' . $row . '</h3>Perkara';
+							$query = $this->db->query("SELECT * FROM perkara_putusan WHERE YEAR(tanggal_putusan) = '$currentYear'");
+							$row = $query->num_rows();
 							echo '<h3>' . $row . '</h3>Perkara';
+
 							?>
 							<p>Putus</p>
 						</div>
@@ -86,12 +100,11 @@
 					<div class="small-box bg-warning rounded-box">
 						<div class="inner">
 							<?php
-							//require 'connectdb_dashboard.php';
+							$this->load->database();
+							$query = $this->db->query('SELECT * FROM perkara_putusan');
 							$currentYear = date('Y');
-							$query = "select * from perkara_putusan where year(tanggal_minutasi)= '$currentYear'";
-							$query_run = mysqli_query($connection, $query);
-							//return $query->result();
-							$row = mysqli_num_rows($query_run);
+							$query = $this->db->query("SELECT * FROM perkara_putusan WHERE YEAR(tanggal_minutasi) = '$currentYear'");
+							$row = $query->num_rows();
 							echo '<h3>' . $row . '</h3>Perkara';
 							?>
 							<p>Minutasi</p>
@@ -105,16 +118,16 @@
 					<div class="small-box bg-danger rounded-box">
 						<div class="inner">
 							<?php
+							$this->load->database();
+							$query = $this->db->query('SELECT * FROM perkara');
 
 							$currentYear = date('Y');
-							$query = "select * from perkara
-							      left join perkara_putusan on perkara.perkara_id = perkara_putusan.perkara_id
-							      where tanggal_putusan is null and year(tanggal_pendaftaran)='$currentYear' ";
+							// $query = "select * from perkara
+							//       left join perkara_putusan on perkara.perkara_id = perkara_putusan.perkara_id
+							//       where tanggal_putusan is null and year(tanggal_pendaftaran)='$currentYear' ";
 
-
-							$query_run = mysqli_query($connection, $query);
-							//return $query->result();
-							$row = mysqli_num_rows($query_run);
+							$query = $this->db->query("SELECT * FROM perkara left join perkara_putusan on perkara.perkara_id = perkara_putusan.perkara_id where tanggal_putusan is null and year(tanggal_pendaftaran) = '$currentYear'");
+							$row = $query->num_rows();
 							echo '<h3>' . $row . '</h3>Perkara';
 							?>
 							<p>Sisa</p>
@@ -122,38 +135,26 @@
 
 					</div>
 				</div>
-				<!-- ./col -->
-
-				<!-- /.row -->
-				<!-- Main row -->
-
-				<!-- /.row (main row) -->
+			
 			</div><!-- /.container-fluid -->
-
 			<?php
-			require 'connectdb_dashboard.php';
+			$this->load->database();
+		// require 'connectdb_dashboard.php';
 			$currentYear = date('Y');
 			$currentMonth = date('m');
-			
+
 
 			// Fetch data from database
-			$queries = [
-				
-				"select * from perkara where month(tanggal_pendaftaran)= '$currentMonth' and year(tanggal_pendaftaran)= '$currentYear'",
-				"select * from perkara_putusan where month(tanggal_putusan)= '$currentMonth' and year(tanggal_putusan)= '$currentYear'",
-				"select * from perkara_putusan where month(tanggal_minutasi)= '$currentMonth' and year(tanggal_minutasi)= '$currentYear'",
-				"select * from perkara
-		left join perkara_putusan on perkara.perkara_id = perkara_putusan.perkara_id
-		where tanggal_putusan is null and month(tanggal_pendaftaran)= '$currentMonth' and year(tanggal_pendaftaran)= '$currentYear'",
-
-				"select * from perkara where month(tanggal_pendaftaran)= '$currentMonth' and year(tanggal_pendaftaran)= '$currentYear'"
-			];
-
+		$queries = [ "SELECT * FROM perkara WHERE MONTH(tanggal_pendaftaran) = '$currentMonth' AND YEAR(tanggal_pendaftaran) = '$currentYear'",
+		"SELECT * FROM perkara_putusan WHERE MONTH(tanggal_putusan) = '$currentMonth' AND YEAR(tanggal_putusan) = '$currentYear'",
+		"SELECT * FROM perkara_putusan WHERE MONTH(tanggal_minutasi) = '$currentMonth' AND YEAR(tanggal_minutasi) = '$currentYear'",
+		"SELECT * FROM perkara LEFT JOIN perkara_putusan ON perkara.perkara_id = perkara_putusan.perkara_id WHERE tanggal_putusan IS NULL AND MONTH(tanggal_pendaftaran) = '$currentMonth' AND YEAR(tanggal_pendaftaran) = '$currentYear'",
+		"SELECT * FROM perkara WHERE MONTH(tanggal_pendaftaran) = '$currentMonth' AND YEAR(tanggal_pendaftaran) = '$currentYear'"];
+			
 			$data = [];
 			foreach ($queries as $query) {
-				$query_run = mysqli_query($connection, $query);
-				$row = mysqli_num_rows($query_run);
-				$data[] = $row;
+				$result = $this->db->query($query);
+				$data[] = $result->num_rows();
 			}
 			?>
 
@@ -204,6 +205,8 @@
 			</script>
 	</section>
 	<!-- /.content -->
+
+
 </div>
 <!-- /.content-wrapper -->
 

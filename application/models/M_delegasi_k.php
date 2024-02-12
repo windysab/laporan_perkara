@@ -61,6 +61,7 @@ class M_delegasi_k extends CI_Model
 		dpm.`tgl_surat_diterima`,
 		dpm.`tgl_pengiriman_relaas`,
 		dpm.`tgl_resi`,
+		dpm.`diinput_tanggal`,
 		pe.`jurusita_text`,
 		dm.`jenis_delegasi_text`
 		');

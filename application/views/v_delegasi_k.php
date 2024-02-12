@@ -112,7 +112,8 @@
 														echo "<td> - </td>";
 													}
 													?> -->
-													<td><?php echo $row->tgl_pengiriman_relaas ?></td>
+													<!-- <td><?php echo $row->tgl_pengiriman_relaas ?></td> -->
+													<td><?php echo $row->diinput_tanggal ?></td>
 													<td><?php echo str_replace("Juru Sita Pengganti:", "", $row->jurusita_text) ?></td>
 													<td><?php echo $row->jenis_delegasi_text ?></td>
 
