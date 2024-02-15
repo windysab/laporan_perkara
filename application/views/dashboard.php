@@ -23,7 +23,10 @@
 	<section class="content">
 		<div class="container-fluid">
 			<!-- Small boxes (Stat box) -->
-			<h4>Perkara</h4>
+			<?php
+			$currentYear = date('Y');
+			echo "<h4 style='text-align: center;'>Perkara Tahun : $currentYear</h4>";
+			?>
 			<div class="row">
 				<div class="col-lg-3 col-6">
 					<!-- small box -->
@@ -44,20 +47,15 @@
 
 					<div class="col-lg-3 col-6">
 						<!-- small box -->
-
 						<div class="small-box bg-info rounded-box">
 							<div class="inner">
 								<?php
-
 								// Load the database configuration
 								$this->load->database();
-
 								// Now you can use $this->db to interact with the database
 								$query = $this->db->query('SELECT * FROM perkara');
-
 								$currentYear = date('Y');
 								$query = $this->db->query("SELECT * FROM perkara WHERE YEAR(tanggal_pendaftaran) = '$currentYear'");
-
 								$row = $query->num_rows();
 								echo '<h3>' . $row . '</h3>Perkara';
 								?>
@@ -74,16 +72,7 @@
 							<?php
 							$this->load->database();
 							$query = $this->db->query('SELECT * FROM perkara_putusan');
-
-
-
 							$currentYear = date('Y');
-							// $query = "select * from perkara_putusan where year(tanggal_putusan)= '$currentYear'";
-
-							// $query_run = mysqli_query($connection, $query);
-							// //return $query->result();
-							// $row = mysqli_num_rows($query_run);
-							// echo '<h3>' . $row . '</h3>Perkara';
 							$query = $this->db->query("SELECT * FROM perkara_putusan WHERE YEAR(tanggal_putusan) = '$currentYear'");
 							$row = $query->num_rows();
 							echo '<h3>' . $row . '</h3>Perkara';
@@ -122,10 +111,6 @@
 							$query = $this->db->query('SELECT * FROM perkara');
 
 							$currentYear = date('Y');
-							// $query = "select * from perkara
-							//       left join perkara_putusan on perkara.perkara_id = perkara_putusan.perkara_id
-							//       where tanggal_putusan is null and year(tanggal_pendaftaran)='$currentYear' ";
-
 							$query = $this->db->query("SELECT * FROM perkara left join perkara_putusan on perkara.perkara_id = perkara_putusan.perkara_id where tanggal_putusan is null and year(tanggal_pendaftaran) = '$currentYear'");
 							$row = $query->num_rows();
 							echo '<h3>' . $row . '</h3>Perkara';
@@ -135,38 +120,33 @@
 
 					</div>
 				</div>
-			
+
 			</div><!-- /.container-fluid -->
 			<?php
 			$this->load->database();
-		// require 'connectdb_dashboard.php';
+			// require 'connectdb_dashboard.php';
 			$currentYear = date('Y');
 			$currentMonth = date('m');
-
-
+			$currentMonthName = date('F'); //
 			// Fetch data from database
-		$queries = [ "SELECT * FROM perkara WHERE MONTH(tanggal_pendaftaran) = '$currentMonth' AND YEAR(tanggal_pendaftaran) = '$currentYear'",
-		"SELECT * FROM perkara_putusan WHERE MONTH(tanggal_putusan) = '$currentMonth' AND YEAR(tanggal_putusan) = '$currentYear'",
-		"SELECT * FROM perkara_putusan WHERE MONTH(tanggal_minutasi) = '$currentMonth' AND YEAR(tanggal_minutasi) = '$currentYear'",
-		"SELECT * FROM perkara LEFT JOIN perkara_putusan ON perkara.perkara_id = perkara_putusan.perkara_id WHERE tanggal_putusan IS NULL AND MONTH(tanggal_pendaftaran) = '$currentMonth' AND YEAR(tanggal_pendaftaran) = '$currentYear'",
-		"SELECT * FROM perkara WHERE MONTH(tanggal_pendaftaran) = '$currentMonth' AND YEAR(tanggal_pendaftaran) = '$currentYear'"];
-			
+			$queries = [
+				"SELECT * FROM perkara WHERE MONTH(tanggal_pendaftaran) = '$currentMonth' AND YEAR(tanggal_pendaftaran) = '$currentYear'",
+				"SELECT * FROM perkara_putusan WHERE MONTH(tanggal_putusan) = '$currentMonth' AND YEAR(tanggal_putusan) = '$currentYear'",
+				"SELECT * FROM perkara_putusan WHERE MONTH(tanggal_minutasi) = '$currentMonth' AND YEAR(tanggal_minutasi) = '$currentYear'",
+				"SELECT * FROM perkara LEFT JOIN perkara_putusan ON perkara.perkara_id = perkara_putusan.perkara_id WHERE tanggal_putusan IS NULL AND MONTH(tanggal_pendaftaran) = '$currentMonth' AND YEAR(tanggal_pendaftaran) = '$currentYear'",
+				"SELECT * FROM perkara WHERE MONTH(tanggal_pendaftaran) = '$currentMonth' AND YEAR(tanggal_pendaftaran) = '$currentYear'"
+			];
 			$data = [];
 			foreach ($queries as $query) {
 				$result = $this->db->query($query);
 				$data[] = $result->num_rows();
 			}
+			echo "<h5 style='text-align: center;'>Perkara Bulan $currentMonthName</h5>";
 			?>
-
 			<!-- Include Chart.js -->
+			
 			<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-			<!-- Canvas element where the chart will be drawn -->
-			<!-- Canvas element where the chart will be drawn -->
-			<!-- <canvas id="myChart" style="width: 400px; height: 200px;"></canvas> -->
-			<!-- Canvas element where the chart will be drawn -->
 			<canvas id="myChart" width="200" height="100"></canvas>
-
 			<script>
 				// Initialize a new Chart.js object
 				var ctx = document.getElementById('myChart').getContext('2d');
