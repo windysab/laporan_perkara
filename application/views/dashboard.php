@@ -134,7 +134,15 @@
 				"SELECT * FROM perkara_putusan WHERE MONTH(tanggal_putusan) = '$currentMonth' AND YEAR(tanggal_putusan) = '$currentYear'",
 				"SELECT * FROM perkara_putusan WHERE MONTH(tanggal_minutasi) = '$currentMonth' AND YEAR(tanggal_minutasi) = '$currentYear'",
 				"SELECT * FROM perkara LEFT JOIN perkara_putusan ON perkara.perkara_id = perkara_putusan.perkara_id WHERE tanggal_putusan IS NULL AND MONTH(tanggal_pendaftaran) = '$currentMonth' AND YEAR(tanggal_pendaftaran) = '$currentYear'",
-				"SELECT * FROM perkara WHERE MONTH(tanggal_pendaftaran) = '$currentMonth' AND YEAR(tanggal_pendaftaran) = '$currentYear'"
+
+				// 				SELECT COUNT(*) AS sisa_bulan_ini
+				// FROM perkara
+				// INNER JOIN perkara_penetapan ON perkara.`perkara_id`=perkara_penetapan.`perkara_id`
+				// LEFT JOIN perkara_putusan ON perkara.`perkara_id` = perkara_putusan.`perkara_id`
+				// WHERE (tanggal_putusan IS NULL OR(tanggal_putusan > '2024-02-31')) AND tanggal_pendaftaran<='2024-02-31'
+
+				"SELECT * FROM perkara INNER JOIN perkara_penetapan ON perkara.`perkara_id`=perkara_penetapan.`perkara_id` LEFT JOIN perkara_putusan ON perkara.`perkara_id` = perkara_putusan.`perkara_id` WHERE (tanggal_putusan IS NULL OR(tanggal_putusan > '$currentYear-$currentMonth-31')) AND tanggal_pendaftaran<='$currentYear-$currentMonth-31'"
+
 			];
 			$data = [];
 			foreach ($queries as $query) {
@@ -144,7 +152,7 @@
 			echo "<h5 style='text-align: center;'>Perkara Bulan $currentMonthName</h5>";
 			?>
 			<!-- Include Chart.js -->
-			
+
 			<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 			<canvas id="myChart" width="200" height="100"></canvas>
 			<script>
@@ -188,7 +196,8 @@
 
 
 </div>
-<!-- /.content-wrapper -->
+<!-- /.
+content-wrapper -->
 
 </body>
 

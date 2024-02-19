@@ -83,6 +83,33 @@
   						</li>
   					</ul>
   				</li>
+  				<li class="nav-item">
+  					<a href="#" class="nav-link">
+  						<i class="nav-icon fas fa-folder"></i>
+  						<p>
+  							DATA PERCERAIAN
+  							<i class="fas fa-angle-left right"></i>
+  						</p>
+  					</a>
+  					<ul class="nav nav-treeview">
+  						<li class="nav-item">
+  							<a href="<?php echo site_url('Data_Perceraian_hsu') ?>" class="nav-link">
+  								<i class="far fa-circle nav-icon"></i>
+  								<p>HULU SUNGAI UTARA
+  								</p>
+  							</a>
+  						</li>
+  						<li class="nav-item">
+  							<a href="<?php echo site_url('Data_Perceraian_balangan') ?>" class="nav-link">
+  								<i class="far fa-circle nav-icon"></i>
+  								<p>BALANGAN
+  								</p>
+  							</a>
+  						</li>
+
+  					</ul>
+  				</li>
+
 
   			</ul>
   			</li>

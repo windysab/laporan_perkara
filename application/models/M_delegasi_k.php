@@ -5,49 +5,7 @@ class M_delegasi_k extends CI_Model
 	function delegasi_k($lap_bulan, $lap_tahun)
 	{
 
-	// 	SELECT 
-	// 	dm.perkara_id,
-	// 	dm.pn_tujuan_text,
-	// 	dm.`nomor_perkara`,
-	// 	dm.pihak,
-	// 	dm.`nomor_surat`,
-	// 	tanggal_pendaftaran,
-	// 	dm.`tgl_surat`,
-	// 	dm.`tgl_sidang`,
-	// 	dm.`tgl_delegasi`,
-	// 	dpm.`tgl_surat_diterima`,
-	// 	dpm.`tgl_pengiriman_relaas`,
-	// 	dpm.`tgl_resi`,
-	// 	dpm.`jurusita_nama`,
-	// 	dm.`jenis_delegasi_text`
-	//  FROM 
-	// 	perkara da
-	//  LEFT JOIN 
-	// 	 delegasi_keluar dm
-	//  ON
-	// 	 da.`perkara_id` = dm.perkara_id
-	//  LEFT JOIN
-	// 	 delegasi_proses_keluar dpm
-	//  ON
-	// 	 dm.id = dpm.`delegasi_id`
-	//  WHERE
-		 
-	// 	 dm.tgl_surat >= '2023-03-01' AND dm.tgl_surat <= '2023-03-31'
-	// 	 AND dm.pn_tujuan_text = 'PENGADILAN AGAMA PENAJAM'
-		 
-		 
-		 
-		  
-		
-		
-	//  GROUP BY 
-	// 	 dm.tgl_surat, dm.nomor_surat
-	 
-		 
-		 
-	//  ORDER BY
-	// 	 dm.perkara_id DESC
-
+	
 		$this->db->select('
 		dm.perkara_id,
 		dm.pn_tujuan_text,
