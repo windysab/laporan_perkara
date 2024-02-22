@@ -118,12 +118,13 @@ class M_data_perceraian_balangan extends CI_Model
 		
 	
 	UNION ALL
+	
 	SELECT 
-		'TOTAL' AS KECAMATAN,
-		SUM(PERKARA_MASUK) AS PERKARA_MASUK,
-		SUM(PERKARA_PUTUS) AS PERKARA_PUTUS,
-		SUM(PERKARA_TELAH_BHT) AS PERKARA_TELAH_BHT,
-		SUM(JUMLAH_AKTA_CERAI) AS JUMLAH_AKTA_CERAI
+		'TOTAL',
+		SUM(COALESCE(subquery.PERKARA_MASUK, 0)) AS PERKARA_MASUK,
+		SUM(COALESCE(subquery.PERKARA_PUTUS, 0)) AS PERKARA_PUTUS,
+		SUM(COALESCE(subquery.PERKARA_TELAH_BHT, 0)) AS PERKARA_TELAH_BHT,
+		SUM(COALESCE(subquery.JUMLAH_AKTA_CERAI, 0)) AS JUMLAH_AKTA_CERAI
 	FROM (
 		SELECT 
 			KECAMATAN,
@@ -156,7 +157,7 @@ class M_data_perceraian_balangan extends CI_Model
 			UNION ALL
 			SELECT 
 				CASE 
-				WHEN perkara_pihak1.`alamat` LIKE '%Paringin Selatan%' THEN 'Paringin Selatan'
+					WHEN perkara_pihak1.`alamat` LIKE '%Paringin Selatan%' THEN 'Paringin Selatan'
 					WHEN perkara_pihak1.`alamat` LIKE '%Paringin%' THEN 'Paringin'
 					WHEN perkara_pihak1.`alamat` LIKE '%Lampihong%' THEN 'Lampihong'
 					WHEN perkara_pihak1.`alamat` LIKE '%Batumandi%' THEN 'Batumandi'
@@ -165,6 +166,7 @@ class M_data_perceraian_balangan extends CI_Model
 					WHEN perkara_pihak1.`alamat` LIKE '%Tebing Tinggi%' THEN 'Tebing Tinggi'
 					WHEN perkara_pihak1.`alamat` LIKE '%Juai%' THEN 'Juai'				
 					ELSE 'HULU SUNGAI UTARA'
+					
 				END AS KECAMATAN,
 				'tanggal_pendaftaran' AS date_type, COUNT(*) AS COUNT
 			FROM perkara
@@ -195,7 +197,7 @@ class M_data_perceraian_balangan extends CI_Model
 			UNION ALL
 			SELECT 
 				CASE 
-				WHEN perkara_pihak1.`alamat` LIKE '%Paringin Selatan%' THEN 'Paringin Selatan'
+					WHEN perkara_pihak1.`alamat` LIKE '%Paringin Selatan%' THEN 'Paringin Selatan'
 					WHEN perkara_pihak1.`alamat` LIKE '%Paringin%' THEN 'Paringin'
 					WHEN perkara_pihak1.`alamat` LIKE '%Lampihong%' THEN 'Lampihong'
 					WHEN perkara_pihak1.`alamat` LIKE '%Batumandi%' THEN 'Batumandi'
@@ -204,6 +206,7 @@ class M_data_perceraian_balangan extends CI_Model
 					WHEN perkara_pihak1.`alamat` LIKE '%Tebing Tinggi%' THEN 'Tebing Tinggi'
 					WHEN perkara_pihak1.`alamat` LIKE '%Juai%' THEN 'Juai'				
 					ELSE 'HULU SUNGAI UTARA'
+					
 				END AS KECAMATAN,
 				'tanggal_bht' AS date_type, COUNT(*) AS COUNT
 			FROM perkara
@@ -214,13 +217,11 @@ class M_data_perceraian_balangan extends CI_Model
 			AND perkara_pihak1.`urutan`='1'
 			GROUP BY KECAMATAN
 		) AS subquery
-		WHERE KECAMATAN IN ('Paringin', 'Paringin Selatan', 'Lampihong', 'Batumandi', 'Awayan', 'Halong', 'Tebing Tinggi', 'Juai')
 		GROUP BY KECAMATAN
-
-	) AS subquery";
-	
+	) AS subquery
+	WHERE KECAMATAN IN ('Paringin', 'Paringin Selatan', 'Lampihong', 'Batumandi', '
+	Awayan', 'Halong', 'Tebing Tinggi', 'Juai')";
 		$query = $this->db->query($sql);
 		return $query->result();
 	}
-	
 }
