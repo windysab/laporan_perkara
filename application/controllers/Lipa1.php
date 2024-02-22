@@ -145,7 +145,7 @@ class Lipa1 extends CI_Controller
 			$spreadsheet->getActiveSheet()->setCellValue('H' . $row, $item->penetapan_hari_sidang);
 			$spreadsheet->getActiveSheet()->setCellValue('I' . $row, $item->sidang_pertama);
 			$spreadsheet->getActiveSheet()->setCellValue('J' . $row, $item->tanggal_putusan);
-			$spreadsheet->getActiveSheet()->setCellValue('K' . $row, $item->status_putusan_nama);
+			$spreadsheet->getActiveSheet()->setCellValue('K' . $row, $item->amar);
 			$spreadsheet->getActiveSheet()->setCellValue('L' . $row, $item->pekerjaan);
 			$spreadsheet->getActiveSheet()->setCellValue('M' . $row, $item->alamat_pihak2);
 			$spreadsheet->getActiveSheet()->setCellValue('N' . $row, $item->prodeo);

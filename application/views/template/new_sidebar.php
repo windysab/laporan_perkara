@@ -110,6 +110,61 @@
   					</ul>
   				</li>
 
+  				<li class="nav-item">
+  					<a href="#" class="nav-link">
+  						<i class="nav-icon fas fa-folder"></i>
+  						<p>
+  							AKTA CERAI
+  							<i class="fas fa-angle-left right"></i>
+  						</p>
+  					</a>
+  					<ul class="nav nav-treeview">
+  						<li class="nav-item">
+  							<a href="<?php echo site_url('Penerbitan_akta_cerai') ?>" class="nav-link">
+  								<i class="far fa-circle nav-icon"></i>
+  								<p>LAPORAN PENERBITAN AKTA CERAI
+  								</p>
+  							</a>
+  						</li>
+  						<li class="nav-item">
+  							<a href="<?php echo site_url('Penyerahan_akta_cerai') ?>" class="nav-link">
+  								<i class="far fa-circle nav-icon"></i>
+  								<p>LAPORAN PENYERAHAN AKTA CERAI
+  								</p>
+  							</a>
+  						</li>
+
+  					</ul>
+  				</li>
+  				<li class="nav-item">
+  					<a href="#" class="nav-link">
+  						<i class="nav-icon fas fa-folder"></i>
+  						<p>
+  							PERKARA
+  							<i class="fas fa-angle-left right"></i>
+  						</p>
+  					</a>
+  					<ul class="nav nav-treeview">
+  						<li class="nav-item">
+  							<a href="<?php echo site_url('Lipa1') ?>" class="nav-link">
+  								<i class="far fa-circle nav-icon"></i>
+  								<p>LAPORAN KEADAAN PERKARA</p>
+  							</a>
+  						</li>
+  						<li class="nav-item">
+  							<a href="<?php echo site_url('Perkara_Banding') ?>" class="nav-link">
+  								<i class="far fa-circle nav-icon"></i>
+  								<p>PERKARA BANDING</p>
+  							</a>
+  						</li>
+  						<li class="nav-item">
+  							<a href="<?php echo site_url('Perkara_Putusan') ?>" class="nav-link">
+  								<i class="far fa-circle nav-icon"></i>
+  								<p>PERKARA PUTUSAN</p>
+  							</a>
+  						</li>
+  					</ul>
+
 
   			</ul>
   			</li>

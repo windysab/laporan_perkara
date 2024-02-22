@@ -7,7 +7,7 @@
 				<div class="container-fluid">
 					<div class="row mb-2">
 						<div class="col-sm-6">
-							<h5>PERKARA BANDING</h5>
+							<h5>LAPORAN PENERBITAN AKTA CERAI</h5>
 						</div>
 						<div class="col-sm-6">
 							<ol class="breadcrumb float-sm-right">
@@ -25,8 +25,7 @@
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<form action="<?php echo base_url() ?>index.php/Perkara_Banding" method="post">
-
+									<form action="<?php echo base_url() ?>index.php/Penerbitan_akta_cerai" method="POST">
 										Laporan Bulan :
 										<select name="lap_bulan" required="">
 											<option value="01" <?php echo (isset($_POST['lap_bulan']) && $_POST['lap_bulan'] === '01') ? 'selected' : ''; ?>>Januari</option>
@@ -63,38 +62,31 @@
 									<table class="table table-bordered table-striped" id="example1">
 										<thead>
 											<tr>
-												
-												<th>Nomor</th>
+												<th>No</th>
+												<th>Nomor Akta Cerai</th>
+												<th>Tanggal Terbit</th>
+												<th>No. Seri</th>
 												<th>Nomor Perkara</th>
-												<th>Putusan PA</th>
-												<th>Permohonan Banding</th>
-												<th>Pemberitahuan Inzage</th>
-												<th>Pengiriman  berkas Ke PTA</th>
-												<th>Putusan Banding</th>
-												<th>Penerimaan kembali ke PA </th>
-												<th>Pemberitahuan ke Para Pihak</th>
+												<th>Tanggal Putusan</th>
+												<th>Tanggal BHT</th>
+												<th>Tanggal Ikrar Talak</th>
 											</tr>
 										</thead>
 										<tbody>
 											<?php
-											$no = 1;  // Initialize $no
-											foreach ($results as $row) : ?>
+											$no = 1;
+											foreach ($datafilter as $row) : ?>
 												<tr>
 													<td><?php echo $no++ ?></td>
-													<td><?php echo $row->nomor_perkara_pn ?></td>
-													<td><?php echo $row->putusan_pn ?></td>
-													<td><?php echo $row->permohonan_banding ?></td>
-													<td><?php echo $row->pemberitahuan_inzage ?></td>
-													<td><?php echo $row->pengiriman_berkas_banding ?></td>
-													<td><?php echo $row->putusan_banding ?></td>
-													<td><?php echo $row->penerimaan_kembali_berkas_banding ?></td>
-													<td><?php echo $row->pemberitahuan_putusan_banding ?></td>
+													<td><?php echo $row->nomor_akta_cerai ?></td>
+													<td><?php echo $row->tgl_akta_cerai ?></td>
+													<td><?php echo $row->no_seri_akta_cerai ?></td>
+													<td><?php echo $row->nomor_perkara ?></td>
+													<td><?php echo $row->tanggal_putusan ?></td>
+													<td><?php echo $row->tanggal_bht ?></td>
+													<td><?php echo $row->tgl_ikrar_talak ?></td>
 												</tr>
 											<?php endforeach; ?>
-											<?php if (empty($results)) : ?>
-												<tr><td colspan="9=" class="text-center">NIHIL</td></tr>
-											
-											<?php endif; ?>
 										</tbody>
 									</table>
 								</div>
@@ -112,3 +104,29 @@
 			<!-- /.content -->
 		</div>
 	</div>
+	<!-- ./wrapper -->
+
+	<!-- Page specific script -->
+	<script>
+		$(function() {
+			$("#DataTable").DataTable({
+				"responsive": true,
+				"lengthChange": false,
+				"autoWidth": false,
+				"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+			}).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+			$('#DataTable').DataTable({
+				"paging": true,
+				"lengthChange": false,
+				"searching": false,
+				"ordering": true,
+				"info": true,
+				"autoWidth": false,
+				"responsive": true,
+			});
+		});
+	</script>
+
+</body>
+
+</html>

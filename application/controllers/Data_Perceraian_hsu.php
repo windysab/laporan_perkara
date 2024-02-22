@@ -7,7 +7,9 @@ class Data_Perceraian_hsu extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		
 		$this->load->model("M_data_perceraian_hsu");
+		
 	}
 
 	public function index()

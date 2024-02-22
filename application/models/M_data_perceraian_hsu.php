@@ -7,6 +7,7 @@ class M_data_perceraian_hsu extends CI_Model
 
 	function data_perceraian_hsu($lap_bulan, $lap_tahun)
 	{
+		
 		$sql = "SELECT 
 		KECAMATAN,
 		SUM(CASE WHEN date_type = 'tanggal_pendaftaran' THEN COUNT ELSE 0 END) AS PERKARA_MASUK,

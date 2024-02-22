@@ -6,9 +6,10 @@ class M_lipa1 extends CI_Model
     public function getData($lap_tahun, $lap_bulan, $jenis_perkara)
     {
 
-		$query = $this->db->query("SELECT nomor_perkara, jenis_perkara_nama, majelis_hakim_nama, panitera_pengganti_text, tanggal_pendaftaran, penetapan_majelis_hakim, penetapan_hari_sidang, sidang_pertama, tanggal_putusan, status_putusan_nama, pekerjaan, perkara_pihak2.alamat as alamat_pihak2, prodeo, pihak.email as email_pihak1 FROM perkara
+		$query = $this->db->query("SELECT nomor_perkara, jenis_perkara_nama, majelis_hakim_nama, panitera_pengganti_text, tanggal_pendaftaran, penetapan_majelis_hakim, penetapan_hari_sidang, sidang_pertama, tanggal_putusan, status_putusan.`nama` AS amar, pekerjaan, perkara_pihak2.alamat as alamat_pihak2, prodeo, pihak.email as email_pihak1 FROM perkara
 			LEFT JOIN perkara_penetapan ON perkara.perkara_id = perkara_penetapan.perkara_id
 			LEFT JOIN perkara_putusan ON perkara.perkara_id = perkara_putusan.perkara_id
+			LEFT JOIN status_putusan ON status_putusan.id = perkara_putusan.status_putusan_id 
 			LEFT JOIN perkara_pihak1 ON perkara.perkara_id = perkara_pihak1.perkara_id
 			LEFT JOIN perkara_pihak2 ON perkara.perkara_id = perkara_pihak2.perkara_id
 			LEFT JOIN pihak ON perkara_pihak1.pihak_id = pihak.id

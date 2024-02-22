@@ -140,7 +140,7 @@
 														<th>Penetapan Hari Sidang</th>
 														<th>Sidang Pertama</th>
 														<th>Tanggal Putusan</th>
-														<th>Status Putusan</th>
+														<th>Jenis Putusan</th>
 														<th>Status Pekerjaan</th>
 														<th>Keterangan</th>
 														<th>alamat gaib</th>
@@ -163,7 +163,7 @@
 															<td><?php echo $item->penetapan_hari_sidang; ?></td>
 															<td><?php echo $item->sidang_pertama; ?></td>
 															<td><?php echo $item->tanggal_putusan; ?></td>
-															<td><?php echo $item->status_putusan_nama; ?></td>
+															<td><?php echo $item->amar; ?></td>
 															<td><?php echo $item->pekerjaan; ?></td>
 															<td>
 																<?php
