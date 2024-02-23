@@ -132,9 +132,9 @@
 													<?php endforeach; ?>
 
 													<?php if (empty($result)) : ?>
-														<tr>
-															<td colspan="5" class="text-center">Tidak ada data yang tersedia</td>
-														</tr>
+														<!-- <tr>
+															<td colspan="9" class="text-center">Tidak ada data yang tersedia</td>
+														</tr> -->
 													<?php endif; ?>
 												</tbody>
 											</table>
