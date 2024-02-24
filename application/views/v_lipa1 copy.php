@@ -26,10 +26,23 @@
 							<div class="card">
 								<div class="card-header">
 
+									<?php
+									if (isset($_POST['btn'])) {
 
-
+										$jenis_perkara = $this->input->post('jenis_perkara'); // Get the selected value
+										$lap_bulan = $this->input->post('lap_bulan');
+										$lap_tahun = $this->input->post('lap_tahun');
+										$data = $this->M_lipa1->getData($lap_tahun, $lap_bulan, $jenis_perkara);
+										$result = $this->M_lipa1->getJumlah($lap_tahun, $lap_bulan, $jenis_perkara);
+									}
+									?>
+									
 									<form action="<?php echo base_url() ?>index.php/Lipa1" method="POST">
-
+										Jenis Perkara :
+										<select name="jenis_perkara" id="jenis_perkara" required>
+											<option value="Pdt.G" <?php echo (isset($_POST['jenis_perkara']) && $_POST['jenis_perkara'] === 'Pdt.G') ? 'selected' : ''; ?>>Pdt.G</option>
+											<option value="Pdt.P" <?php echo (isset($_POST['jenis_perkara']) && $_POST['jenis_perkara'] === 'Pdt.P') ? 'selected' : ''; ?>>Pdt.P</option>
+										</select>
 										Laporan Bulan :
 										<select name="lap_bulan" id="lap_bulan" required>
 											<option value="01" <?php echo (isset($_POST['lap_bulan']) && $_POST['lap_bulan'] === '01') ? 'selected' : ''; ?>>Januari</option>
@@ -112,14 +125,7 @@
 																}
 																?>
 															</td>
-															<td>
-																<?php
-																$alamat = $item->alamat_pihak2;
-																if (strpos($alamat, "namun sekarang tidak diketahui lagi alamatnya dengan jelas dan pasti di wilayah Republik Indonesia") !== false) {
-																	echo $alamat;
-																}
-																?>
-															</td>
+															<td><?php echo $item->alamat_pihak2; ?></td>
 															<td><?php echo ($item->prodeo == 1) ? '#' : ''; ?></td>
 															<td><?php echo $item->email_pihak1; ?></td>
 														</tr>
