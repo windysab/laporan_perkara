@@ -69,14 +69,15 @@
 														<th>No</th>
 														<th>Nomor Perkara</th>
 														<th>Kode Perkara</th>
-														<th>Majelis Hakim Nama</th>
-														<th>Panitera Pengganti Text</th>
-														<th>Tanggal Pendaftaran</th>
+														<th>Nama Majelis Hakim</th>
+														<th>Nama PP</th>
+														<th>Penerimaan</th>
 														<th>Penetapan Majelis Hakim</th>
 														<th>Penetapan Hari Sidang</th>
-														<th>Sidang Pertama</th>
-														<th>Tanggal Putusan</th>
+														<th>Sidang I</th>
+														<th>Diputus</th>
 														<th>Jenis Putusan</th>
+														<th>Belum Diputus</th>
 														<th>Status Pekerjaan</th>
 														<th>Keterangan</th>
 														<th>alamat gaib</th>
@@ -92,14 +93,31 @@
 															<td><?php echo $no++ ?></td>
 															<td><?php echo $item->nomor_perkara; ?></td>
 															<td><?php echo $item->jenis_perkara_nama; ?></td>
-															<td><?php echo str_replace('</br>', ', ', $item->majelis_hakim_nama); ?></td>
-															<td><?php echo $item->panitera_pengganti_text; ?></td>
+
+															<td><?php
+																$nama_hakim = $item->majelis_hakim_nama;
+																$nama_hakim_array = explode('</br>', $nama_hakim);
+
+																echo "Hakim Ketua: " . $nama_hakim_array[0] . "<br>";
+																echo "Hakim Anggota 1: " . $nama_hakim_array[1] . "<br>";
+																echo "Hakim Anggota 2: " . $nama_hakim_array[2];
+																?></td>
+															<td><?php echo str_replace("Panitera Pengganti:", "", $item->panitera_pengganti_text); ?></td>
 															<td><?php echo $item->tanggal_pendaftaran; ?></td>
 															<td><?php echo $item->penetapan_majelis_hakim; ?></td>
 															<td><?php echo $item->penetapan_hari_sidang; ?></td>
 															<td><?php echo $item->sidang_pertama; ?></td>
 															<td><?php echo $item->tanggal_putusan; ?></td>
 															<td><?php echo $item->amar; ?></td>
+															<td>
+																<?php
+																if (!empty($item->tanggal_putusan)) {
+																	echo "";
+																} else {
+																	echo $item->nomor_perkara;
+																}
+																?>
+															</td>
 															<td><?php echo $item->pekerjaan; ?></td>
 															<td>
 																<?php
